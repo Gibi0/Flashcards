@@ -10,7 +10,6 @@ public class Database {
     private final MongoClient client = MongoClients.create("mongodb+srv://DefaultUser:KkNYxPq7OtNyEI6H@cluster0.jeeko.mongodb.net/?retryWrites=true&w=majority");
     private final MongoDatabase db = client.getDatabase("FlashcardsDB");
     private final MongoCollection<Document> col = db.getCollection("FlashcardsCollection");
-    int x;
 
     public MongoClient getClient(){
         return this.client;
