@@ -20,4 +20,5 @@ public class Database {
     public MongoCollection<Document> getCollection(){
         return this.col;
     }
+
 }
