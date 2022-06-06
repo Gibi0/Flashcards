@@ -11,13 +11,11 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        RandomWords r = new RandomWords();
 //        Window window = new Window();
-        Database dataBase = new Database();
-        GetWords getWords = new GetWords();
-        getWords.firstWord();
-        Box.boxReturnToFirst();
-//        System.out.println(getNewWords.firstWord());
+        Window window = new Window();
+//        getWords.firstWord();
+//        Box.boxReturnToFirst();
+//        System.out.println(getWords.firstWord());
 
 
 //        LocalDateTime date = LocalDateTime.now();

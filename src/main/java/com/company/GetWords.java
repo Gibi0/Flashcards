@@ -9,7 +9,7 @@ public class GetWords {
     Database database = new Database();
     static FindIterable<Document> list;
     static MongoCursor<Document> cursor;
-    static Document currentWord ;
+    static Document currentWord;
     static int count = 0;
 
 
