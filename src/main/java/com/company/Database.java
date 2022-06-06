@@ -10,6 +10,8 @@ public class Database {
     private final MongoClient client = MongoClients.create("mongodb+srv://DefaultUser:KkNYxPq7OtNyEI6H@cluster0.jeeko.mongodb.net/?retryWrites=true&w=majority");
     private final MongoDatabase db = client.getDatabase("FlashcardsDB");
     private final MongoCollection<Document> col = db.getCollection("FlashcardsCollection");
+    private final MongoCollection<Document> col2 = db.getCollection("FlashcardsCollection2");
+
 
     public MongoClient getClient(){
         return this.client;
@@ -21,4 +23,7 @@ public class Database {
         return this.col;
     }
 
+    public MongoCollection<Document> getCollection2() {
+        return this.col2;
+    }
 }
