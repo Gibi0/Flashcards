@@ -5,12 +5,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static java.awt.GridBagConstraints.*;
 
 public class Window implements ActionListener {
     GetWords getWords = new GetWords();
     JFrame frame = new JFrame();
-    JButton[] button = new JButton[4];
+    static JButton[] button = new JButton[4];
     Font font = new Font("Dialog", Font.ITALIC, 38);
     RandomWords randomWords = new RandomWords();
     JPanel panel = new JPanel();
@@ -27,9 +26,9 @@ public class Window implements ActionListener {
         button[0].setSize(200, 100);
         button[0].setFocusable(false);
         button[0].addActionListener(this);
-        button[1].setText((String) GetWords.currentWord.get("English_word"));
+        button[1].setText(GetWords.currentWord.getString("English_word"));
         button[1].setFocusable(false);
-        button[1].setPreferredSize(new Dimension(500, 100));
+        button[1].setPreferredSize(new Dimension(800, 100));
         button[1].addActionListener(this);
         button[1].setFont(font);
         button[2].setText("Know");
@@ -40,14 +39,14 @@ public class Window implements ActionListener {
         button[3].setFocusable(false);
         button[3].setSize(200, 100);
         button[3].addActionListener(this);
+
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Flashcards");
-        frame.setLayout(new GridLayout(3,1));
+        frame.setLayout(new GridLayout(3, 1));
+        frame.setResizable(false);
 
-//        frame.setResizable(false);
-
-        panel.add(button[0],BorderLayout.NORTH);
+        panel.add(button[0], BorderLayout.NORTH);
         panel1.add(button[1]);
         panel2.add(button[2]);
         panel2.add(button[3]);
@@ -59,29 +58,48 @@ public class Window implements ActionListener {
 
     public static void popUpMessage() {
         JOptionPane.showMessageDialog(null, "No more words");
+
+    }
+
+    public static void disableButtons() {
+        button[1].setEnabled(false);
+        button[2].setEnabled(false);
+        button[3].setEnabled(false);
+    }
+
+    public static void enableButtons() {
+        button[1].setEnabled(true);
+        button[2].setEnabled(true);
+        button[3].setEnabled(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == button[0]) randomWords.getNewWords();
+        if (e.getSource() == button[0]) {
+            randomWords.getNewWords();
+            enableButtons();
+        }
         if (e.getSource() == button[1]) {
             if (!temp) {
-                button[1].setText((String) GetWords.currentWord.get("Polish_word"));
+                button[1].setText(GetWords.currentWord.getString("Polish_word"));
                 temp = true;
             } else {
-                button[1].setText((String) GetWords.currentWord.get("English_word"));
+                button[1].setText(GetWords.currentWord.getString("English_word"));
                 temp = false;
             }
         }
         if (e.getSource() == button[2]) {
-            Box.boxUpdateUp();
+            if (GetWords.cursor.hasNext()) {
+                Box.boxUpdateUp();
+                Box.checkBox();
+            }
             getWords.getWord();
-            button[1].setText((String) GetWords.currentWord.get("English_word"));
+            button[1].setText(GetWords.currentWord.getString("English_word"));
         }
         if (e.getSource() == button[3]) {
             Box.boxReturnToFirst();
             getWords.getWord();
-            button[1].setText((String) GetWords.currentWord.get("English_word"));
+            button[1].setText(GetWords.currentWord.getString("English_word"));
         }
     }
 }

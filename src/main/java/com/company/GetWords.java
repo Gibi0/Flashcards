@@ -4,8 +4,11 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCursor;
 import org.bson.Document;
 
+import java.util.NoSuchElementException;
+
 
 public class GetWords {
+    RandomWords randomWords = new RandomWords();
     Database database = new Database();
     static FindIterable<Document> list;
     static MongoCursor<Document> cursor;
@@ -19,8 +22,13 @@ public class GetWords {
     }
 
     public void firstWord() {
-        currentWord = list.first();
-        cursor.next();
+        try {
+            currentWord = list.first();
+            cursor.next();
+        } catch (NoSuchElementException e) {
+            randomWords.getNewWords();
+            firstWord();
+        }
     }
 
     public void getWord() {
@@ -29,6 +37,7 @@ public class GetWords {
             count += 1;
         } else {
             Window.popUpMessage();
+            Window.disableButtons();
         }
     }
 

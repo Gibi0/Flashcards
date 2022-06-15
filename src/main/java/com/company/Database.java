@@ -11,19 +11,26 @@ public class Database {
     private final MongoDatabase db = client.getDatabase("FlashcardsDB");
     private final MongoCollection<Document> col = db.getCollection("FlashcardsCollection");
     private final MongoCollection<Document> col2 = db.getCollection("FlashcardsCollection2");
+    private final MongoCollection<Document> col3 = db.getCollection("FlashcardsCollection3");
 
 
-    public MongoClient getClient(){
+    protected MongoClient getClient() {
         return this.client;
     }
-    public MongoDatabase getDb(){
+
+    protected MongoDatabase getDb() {
         return this.db;
     }
-    public MongoCollection<Document> getCollection(){
+
+    protected MongoCollection<Document> getCollection() {
         return this.col;
     }
 
-    public MongoCollection<Document> getCollection2() {
+    protected MongoCollection<Document> getCollection2() {
         return this.col2;
+    }
+
+    protected MongoCollection<Document> getCollection3() {
+        return this.col3;
     }
 }
